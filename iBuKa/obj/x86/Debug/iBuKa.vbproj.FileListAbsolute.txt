@@ -1,0 +1,9 @@
+C:\my.source\git\ibuka\iBuKa\bin\Debug\iBuKa.exe
+C:\my.source\git\ibuka\iBuKa\bin\Debug\iBuKa.pdb
+C:\my.source\git\ibuka\iBuKa\bin\Debug\iBuKa.xml
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmReader.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.Resources.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.vbproj.GenerateResource.Cache
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.exe
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.xml
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.pdb

@@ -22,6 +22,7 @@ Partial Class frmReader
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReader))
         Me.panImage = New System.Windows.Forms.Panel()
         Me.pbImage = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -174,6 +175,7 @@ Partial Class frmReader
         Me.Controls.Add(Me.btnFitWidth)
         Me.Controls.Add(Me.lvPages)
         Me.Controls.Add(Me.btnFitHeight)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "frmReader"
         Me.Text = "BuKa Reader"
