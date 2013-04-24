@@ -9,3 +9,16 @@ C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.xml
 C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.pdb
 C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmStart.resources
 C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmAbout.resources
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.exe
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.xml
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.pdb
+E:\Git\ibuka\iBuKa\bin\Debug\iBuKa.exe
+E:\Git\ibuka\iBuKa\bin\Debug\iBuKa.pdb
+E:\Git\ibuka\iBuKa\bin\Debug\iBuKa.xml
+E:\Git\ibuka\iBuKa\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmAbout.resources
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmReader.resources
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmStart.resources
+E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.Resources.resources
+E:\Git\ibuka\iBuKa\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Git\ibuka\iBuKa\obj\x86\Debug\GenerateResource.write.1.tlog

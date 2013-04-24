@@ -417,12 +417,18 @@ Public Class frmReader
         Dim name = s.Substring(i + 8, j - i - 8)
         Dim idx = 0
         Dim DName As String = ""
-        Do While True
-            If idx <= name.Length - 6 Then
-                DName = DName + ChrW(CInt("&H" & name.Substring(idx + 2, 4)))
-                idx = idx + 6
+        Do While (idx < name.Length)
+            If (idx < name.Length - 1) AndAlso (name.Substring(idx, 2) = "\u") Then
+                If idx <= name.Length - 6 Then
+                    DName = DName + ChrW(CInt("&H" & name.Substring(idx + 2, 4)))
+                    idx = idx + 6
+                Else
+                    ' Unexpected case with "\u" but without 4 bytes unicode follows
+                    Exit Do
+                End If
             Else
-                Exit Do
+                DName = DName + name.Substring(idx, 1)
+                idx = idx + 1
             End If
         Loop
 
