@@ -4,18 +4,23 @@ Imports System.Text.RegularExpressions
 
 Public Class frmReader
 
-    Private idxSigature As Byte() = System.Text.Encoding.ASCII.GetBytes("index2.dat")
+    Private idxSignature As Byte() = System.Text.Encoding.ASCII.GetBytes("index2.dat")
     Dim buffer(10240) As Byte ' Assume the header must be within 10K
     Dim bufferSize As Integer
 
-    Const rightPanel = 80
+    Const rightPanel = 100
     Const initBookSize = 100
     Const extBookSize = 20
-    Dim bukaDir() As String
+
     Dim fileIdx As Integer
+
+
+    Dim comic As BukaComicInfo
+
     Dim bukaBook(initBookSize) As bukaPage
-    Dim bookLogo As bukaPage
-    Dim chaporder As bukaPage
+
+    ' Dim bookLogo As bukaPage
+    ' Dim chaporderBuka As bukaPage
     Dim pageCnt As Integer = 0
     Dim pageIdx As Integer = -1
 
@@ -26,7 +31,8 @@ Public Class frmReader
     Dim imageLoaded As Boolean = False
     Dim startUpFile As String
     Dim startUpPage As Integer
-    Dim comicName As String = ""
+    ' Dim comicName As String = ""
+
 
     Public Sub setStartUpFile(ByVal fn As String, Optional ByVal sp As Integer = 0)
         startUpFile = fn
@@ -106,7 +112,7 @@ Public Class frmReader
     End Sub
 
     Private Sub goNextBook()
-        If (fileIdx < bukaDir.Length - 1) Then
+        If (fileIdx < comic.books.Length - 1) Then
             fileIdx = fileIdx + 1
             SetFile()
         End If
@@ -213,22 +219,29 @@ Public Class frmReader
 
     Public Sub SetDirectory(ByVal filename As String)
         If Not File.Exists(filename) Then Return
-        Dim fi As FileInfo = New FileInfo(filename)
-        Dim fa As FileInfo() = fi.Directory.GetFiles("*.buka")
-        Array.Sort(fa, New SortFiles)
+
+        comic = New BukaComicInfo(filename)
+
+        If Not comic.ready Then Return
 
         lvBooks.Clear()
         lvBooks.Columns.Clear()
         lvBooks.Columns.Add("", 0)
-        lvBooks.Columns.Add("Vol", 30, HorizontalAlignment.Right)
+        If comic.fromDAT Then
+            lvBooks.Columns.Add("DAT", 55, HorizontalAlignment.Left)
+        Else
+            lvBooks.Columns.Add("File", 55, HorizontalAlignment.Left)
+        End If
         lvBooks.Columns.RemoveAt(0)
 
-        ReDim bukaDir(fa.Length - 1)
-        For idx = 0 To fa.Length - 1
-            bukaDir(idx) = fa(idx).FullName
-            lvBooks.Items.Add(New ListViewItem(ReadVol(fa(idx).FullName)))
+        fileIdx = -1
+        For idx = 0 To comic.books.Length - 1
+            lvBooks.Items.Add(New ListViewItem(comic.books(idx).FileInfo))
+            If (comic.books(idx).FileName = filename) Then
+                fileIdx = idx
+            End If
         Next
-        fileIdx = Array.IndexOf(bukaDir, filename)
+
         SetFile()
     End Sub
 
@@ -241,11 +254,23 @@ Public Class frmReader
 
 
     Private Sub ReadFile()
-        Dim fn As String = bukaDir(fileIdx)
+        Dim fn As String = comic.books(fileIdx).FileName
+
         If Not File.Exists(fn) Then
-            MsgBox("File not found: " & fn)
+            lvPages.Items.Clear()
+            pageCnt = -1
+            pageIdx = -1
+            pbImage.Image = Nothing
+            pbImage.Size = New Size(0, 0)
+            'pbImage.Width = panImage.Width - 25
+            'pbImage.Height = panImage.Height - 25
+            lblMessage.Width = panImage.Width
+            lblMessage.Text = "請先到布卡漫畫下載 " & comic.name & " " & comic.books(fileIdx).BookInfo
+            lblMessage.Visible = True
+            lblMessage.BringToFront()
             Return
         End If
+        lblMessage.Visible = False
 
         Dim MyFile As New FileInfo(fn)
 
@@ -255,7 +280,7 @@ Public Class frmReader
         lvPages.Clear()
         lvPages.Columns.Clear()
         lvPages.Columns.Add("", 0)
-        lvPages.Columns.Add("P#.", 30, HorizontalAlignment.Right)
+        lvPages.Columns.Add("Page", 55, HorizontalAlignment.Left)
         lvPages.Columns.RemoveAt(0)
 
         pageCnt = 0
@@ -268,10 +293,10 @@ Public Class frmReader
 
         Dim idxPos = 0
         For idx = 0 To 10240
-            If (buffer(idx) = idxSigature(0)) Then
+            If (buffer(idx) = idxSignature(0)) Then
                 Dim match As Boolean = True
-                For i = 1 To idxSigature.Length - 1
-                    If (buffer(idx + i) <> idxSigature(i)) Then
+                For i = 1 To idxSignature.Length - 1
+                    If (buffer(idx + i) <> idxSignature(i)) Then
                         match = False
                         Exit For
                     End If
@@ -291,9 +316,9 @@ Public Class frmReader
         Do While True
             Dim o As bukaPage = getBukaPage(idxPos)
             If o.name = "logo" Then
-                bookLogo = o
+                ' no action required
             ElseIf o.name = "chaporder.dat" Then
-                chaporder = o
+                ' no action required
                 Exit Do
             Else
                 Addpage(o)
@@ -305,7 +330,7 @@ Public Class frmReader
             lvPages.Items.Add(New ListViewItem({idx}))
         Next
 
-        comicName = ReadName()
+        ' comicName = ReadName()
 
         If startUpPage > 0 Then
             readPage(startUpPage)
@@ -384,7 +409,7 @@ Public Class frmReader
     End Sub
 
     Private Sub ShowHeader()
-        Me.Text = "iBuka@Super169    " & comicName & "  (Vol. " & lvBooks.Items(fileIdx).Text & ")   [page " & (pageIdx + 1) & "/" & pageCnt & "]"
+        Me.Text = "iBuka@Super169    " & comic.name & "  (" & comic.books(fileIdx).BookInfo & ")   [page " & (pageIdx + 1) & "/" & pageCnt & "]"
     End Sub
 
 
@@ -396,44 +421,6 @@ Public Class frmReader
         showPage()
     End Sub
 
-    Private Function ReadVol(ByVal fn As String) As Integer
-        Dim fs = New FileStream(fn, FileMode.Open, FileAccess.Read)
-        Dim data(2) As Byte
-        fs.Seek(16, SeekOrigin.Begin)
-        fs.Read(data, 0, 2)
-        fs.Close()
-        Dim vol As Integer
-        vol = data(1) * 256 + data(0)
-        Return vol
-    End Function
-
-    Private Function ReadName() As String
-        Dim data(500) As Byte
-        fs.Seek(chaporder.startPos, SeekOrigin.Begin)
-        fs.Read(data, 0, 500)
-        Dim s As String = (New System.Text.ASCIIEncoding()).GetString(data)
-        Dim i = s.IndexOf("""name"":")
-        Dim j = s.IndexOf(""",", i + 6)
-        Dim name = s.Substring(i + 8, j - i - 8)
-        Dim idx = 0
-        Dim DName As String = ""
-        Do While (idx < name.Length)
-            If (idx < name.Length - 1) AndAlso (name.Substring(idx, 2) = "\u") Then
-                If idx <= name.Length - 6 Then
-                    DName = DName + ChrW(CInt("&H" & name.Substring(idx + 2, 4)))
-                    idx = idx + 6
-                Else
-                    ' Unexpected case with "\u" but without 4 bytes unicode follows
-                    Exit Do
-                End If
-            Else
-                DName = DName + name.Substring(idx, 1)
-                idx = idx + 1
-            End If
-        Loop
-
-        Return DName
-    End Function
 
 
     Private Sub Form1_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -445,8 +432,13 @@ Public Class frmReader
         myConfig.winWidth = Me.Width
         myConfig.winHeight = Me.Height
         myConfig.viewMode = viewMode
-        myConfig.lastFile = bukaDir(fileIdx)
-        myConfig.lastPage = pageIdx
+        If comic.ready Then
+            myConfig.lastFile = comic.books(fileIdx).FileName
+            myConfig.lastPage = pageIdx
+        Else
+            myConfig.lastFile = ""
+            myConfig.lastPage = -1
+        End If
         myConfig.SaveKey()
     End Sub
 
@@ -458,5 +450,10 @@ Public Class frmReader
 
     Private Sub btnAbout_Click(sender As System.Object, e As System.EventArgs) Handles btnAbout.Click
         frmAbout.Show()
+    End Sub
+
+    Private Sub btnInfo_Click(sender As System.Object, e As System.EventArgs) Handles btnInfo.Click
+        frmComicInfo.SetComic(comic)
+        frmComicInfo.ShowDialog()
     End Sub
 End Class

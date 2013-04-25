@@ -1,0 +1,13 @@
+C:\my.source\git\ibuka\iBuKa\bin\Release\iBuKa.exe
+C:\my.source\git\ibuka\iBuKa\bin\Release\iBuKa.pdb
+C:\my.source\git\ibuka\iBuKa\bin\Release\iBuKa.xml
+C:\my.source\git\ibuka\iBuKa\bin\Release\Newtonsoft.Json.dll
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.frmAbout.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.frmComicInfo.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.frmReader.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.frmStart.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.Resources.resources
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.vbproj.GenerateResource.Cache
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.exe
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.xml
+C:\my.source\git\ibuka\iBuKa\obj\x86\Release\iBuKa.pdb

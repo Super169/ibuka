@@ -22,3 +22,6 @@ E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmStart.resources
 E:\Git\ibuka\iBuKa\obj\x86\Debug\iBuKa.Resources.resources
 E:\Git\ibuka\iBuKa\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\Git\ibuka\iBuKa\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\my.source\git\ibuka\iBuKa\bin\Debug\Newtonsoft.Json.dll
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.vbprojResolveAssemblyReference.cache
+C:\my.source\git\ibuka\iBuKa\obj\x86\Debug\iBuKa.frmComicInfo.resources

@@ -24,6 +24,7 @@ Partial Class frmReader
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReader))
         Me.panImage = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.pbImage = New System.Windows.Forms.PictureBox()
         Me.btnOpen = New System.Windows.Forms.Button()
         Me.lvPages = New System.Windows.Forms.ListView()
@@ -31,6 +32,7 @@ Partial Class frmReader
         Me.lvBooks = New System.Windows.Forms.ListView()
         Me.cboViewMode = New System.Windows.Forms.ComboBox()
         Me.btnAbout = New System.Windows.Forms.Button()
+        Me.btnInfo = New System.Windows.Forms.Button()
         Me.panImage.SuspendLayout()
         CType(Me.pbImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -42,19 +44,33 @@ Partial Class frmReader
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panImage.AutoScroll = True
         Me.panImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panImage.Controls.Add(Me.lblMessage)
         Me.panImage.Controls.Add(Me.pbImage)
         Me.panImage.Location = New System.Drawing.Point(0, 0)
         Me.panImage.Margin = New System.Windows.Forms.Padding(0)
         Me.panImage.Name = "panImage"
-        Me.panImage.Size = New System.Drawing.Size(723, 520)
+        Me.panImage.Size = New System.Drawing.Size(702, 520)
         Me.panImage.TabIndex = 4
+        '
+        'lblMessage
+        '
+        Me.lblMessage.BackColor = System.Drawing.Color.White
+        Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMessage.ForeColor = System.Drawing.Color.Red
+        Me.lblMessage.Location = New System.Drawing.Point(1, 42)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(694, 91)
+        Me.lblMessage.TabIndex = 1
+        Me.lblMessage.Text = "Label1"
+        Me.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblMessage.Visible = False
         '
         'pbImage
         '
         Me.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pbImage.Location = New System.Drawing.Point(0, 0)
         Me.pbImage.Name = "pbImage"
-        Me.pbImage.Size = New System.Drawing.Size(719, 516)
+        Me.pbImage.Size = New System.Drawing.Size(697, 516)
         Me.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.pbImage.TabIndex = 0
         Me.pbImage.TabStop = False
@@ -65,9 +81,9 @@ Partial Class frmReader
         Me.btnOpen.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnOpen.BackgroundImage = CType(resources.GetObject("btnOpen.BackgroundImage"), System.Drawing.Image)
         Me.btnOpen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnOpen.Location = New System.Drawing.Point(726, 43)
+        Me.btnOpen.Location = New System.Drawing.Point(705, 43)
         Me.btnOpen.Name = "btnOpen"
-        Me.btnOpen.Size = New System.Drawing.Size(56, 36)
+        Me.btnOpen.Size = New System.Drawing.Size(77, 36)
         Me.btnOpen.TabIndex = 19
         Me.btnOpen.UseVisualStyleBackColor = False
         '
@@ -76,11 +92,11 @@ Partial Class frmReader
         Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
-        Me.lvPages.Location = New System.Drawing.Point(726, 250)
+        Me.lvPages.Location = New System.Drawing.Point(705, 330)
         Me.lvPages.MultiSelect = False
         Me.lvPages.Name = "lvPages"
         Me.lvPages.OwnerDraw = True
-        Me.lvPages.Size = New System.Drawing.Size(56, 267)
+        Me.lvPages.Size = New System.Drawing.Size(77, 187)
         Me.lvPages.TabIndex = 15
         Me.lvPages.UseCompatibleStateImageBehavior = False
         Me.lvPages.View = System.Windows.Forms.View.Details
@@ -93,11 +109,11 @@ Partial Class frmReader
         '
         Me.lvBooks.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvBooks.FullRowSelect = True
-        Me.lvBooks.Location = New System.Drawing.Point(726, 112)
+        Me.lvBooks.Location = New System.Drawing.Point(705, 153)
         Me.lvBooks.MultiSelect = False
         Me.lvBooks.Name = "lvBooks"
         Me.lvBooks.OwnerDraw = True
-        Me.lvBooks.Size = New System.Drawing.Size(56, 132)
+        Me.lvBooks.Size = New System.Drawing.Size(77, 171)
         Me.lvBooks.TabIndex = 20
         Me.lvBooks.UseCompatibleStateImageBehavior = False
         Me.lvBooks.View = System.Windows.Forms.View.Details
@@ -108,9 +124,9 @@ Partial Class frmReader
         Me.cboViewMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboViewMode.FormattingEnabled = True
         Me.cboViewMode.Items.AddRange(New Object() {"Actual", "AutoFit", "Width", "Height", "WinFit"})
-        Me.cboViewMode.Location = New System.Drawing.Point(726, 85)
+        Me.cboViewMode.Location = New System.Drawing.Point(705, 126)
         Me.cboViewMode.Name = "cboViewMode"
-        Me.cboViewMode.Size = New System.Drawing.Size(56, 21)
+        Me.cboViewMode.Size = New System.Drawing.Size(77, 21)
         Me.cboViewMode.TabIndex = 1
         '
         'btnAbout
@@ -119,11 +135,23 @@ Partial Class frmReader
         Me.btnAbout.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnAbout.BackgroundImage = CType(resources.GetObject("btnAbout.BackgroundImage"), System.Drawing.Image)
         Me.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAbout.Location = New System.Drawing.Point(726, 1)
+        Me.btnAbout.Location = New System.Drawing.Point(705, 1)
         Me.btnAbout.Name = "btnAbout"
-        Me.btnAbout.Size = New System.Drawing.Size(56, 36)
+        Me.btnAbout.Size = New System.Drawing.Size(77, 36)
         Me.btnAbout.TabIndex = 21
         Me.btnAbout.UseVisualStyleBackColor = False
+        '
+        'btnInfo
+        '
+        Me.btnInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnInfo.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnInfo.BackgroundImage = CType(resources.GetObject("btnInfo.BackgroundImage"), System.Drawing.Image)
+        Me.btnInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnInfo.Location = New System.Drawing.Point(705, 85)
+        Me.btnInfo.Name = "btnInfo"
+        Me.btnInfo.Size = New System.Drawing.Size(77, 36)
+        Me.btnInfo.TabIndex = 22
+        Me.btnInfo.UseVisualStyleBackColor = False
         '
         'frmReader
         '
@@ -131,6 +159,7 @@ Partial Class frmReader
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(784, 520)
+        Me.Controls.Add(Me.btnInfo)
         Me.Controls.Add(Me.btnAbout)
         Me.Controls.Add(Me.cboViewMode)
         Me.Controls.Add(Me.lvBooks)
@@ -154,4 +183,6 @@ Partial Class frmReader
     Friend WithEvents lvBooks As System.Windows.Forms.ListView
     Friend WithEvents cboViewMode As System.Windows.Forms.ComboBox
     Friend WithEvents btnAbout As System.Windows.Forms.Button
+    Friend WithEvents btnInfo As System.Windows.Forms.Button
+    Friend WithEvents lblMessage As System.Windows.Forms.Label
 End Class

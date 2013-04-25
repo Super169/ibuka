@@ -52,6 +52,9 @@
     <ApplicationIcon>Images\ibuka169.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -64,26 +67,40 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Newtonsoft" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Runtime.Serialization" />
+    <Import Include="System.Web" />
     <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BukaBookInfo.vb" />
+    <Compile Include="Classes\BukaComicInfo.vb" />
     <Compile Include="Classes\bukaPage.vb" />
     <Compile Include="Classes\modMain.vb" />
     <Compile Include="Classes\myConfig.vb" />
+    <Compile Include="Classes\myUtil.vb" />
     <Compile Include="Classes\SortBuka.vb" />
+    <Compile Include="Classes\SortBukaBooks.vb" />
+    <Compile Include="Classes\SortBukaFiles.vb" />
     <Compile Include="Classes\SortFiles.vb" />
     <Compile Include="Forms\frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmComicInfo.Designer.vb">
+      <DependentUpon>frmComicInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmComicInfo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmReader.Designer.vb">
@@ -118,6 +135,9 @@
     <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmComicInfo.resx">
+      <DependentUpon>frmComicInfo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmReader.resx">
       <DependentUpon>frmReader.vb</DependentUpon>
     </EmbeddedResource>
@@ -142,7 +162,9 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Images\info.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\iBuka.ico" />
     <EmbeddedResource Include="Images\iBuka169.gif" />
